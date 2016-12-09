@@ -102,7 +102,7 @@
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script>
         //var socket = io('http://localhost:3000');
-        var socket = io('http://utility.dev:3000');
+        var socket = io('{{env('APP_URL')}}:3000');
         socket.on("test-channel:App\\Events\\ExcelImportWasDone", function(message){
             console.log(message);
             $proces = $('#proccess-result');
