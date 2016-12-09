@@ -1,0 +1,11 @@
+npm install express
+npm install ioredis
+npm install gulp
+npm install pm2 -g
+pm2 start socket.js
+
+apt-get install supervisor
+cp config/worker.conf /etc/supervisor/conf.d
+supervisorctl reread
+supervisorctl update
+supervisorctl start worker:*

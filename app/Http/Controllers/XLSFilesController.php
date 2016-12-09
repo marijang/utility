@@ -98,6 +98,8 @@ class XLSFilesController extends Controller
             $fileManager = new XLSFiles();
             $fileManager->user_id = $user->id;
             $fileManager->filename = $fileName;
+                $fileManager->original_filename = $fileName;
+                $fileManager->redis_url = '';
             $fileManager->mime = $file->getMimeType();
             $fileManager->save();
 

@@ -81,7 +81,7 @@ class ExcelWorker
 
 	public function demo(){
 		$array = $this->generate_array();
-		Excel::create('Filename_'.rand(11111,99999), function($excel) use ($array) {
+		Excel::create('Filenameaaaaa_'.rand(11111,99999), function($excel) use ($array) {
 			// Set the title
     		$excel->setTitle('Our new awesome title');
     		// Chain the setters

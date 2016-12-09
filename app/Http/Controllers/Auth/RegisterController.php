@@ -6,6 +6,7 @@ use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Storage;
 
 class RegisterController extends Controller
 {
@@ -47,10 +48,24 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        /*
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+        ]);
+        */
+
+        return Validator::make($data, [
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'company' => 'required|max:255',
+            'company_position' => 'required|max:255',
+            'phone' => 'required|max:255',
+            'company_activity' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6|confirmed',
+
         ]);
     }
 
@@ -62,10 +77,25 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        $user = User::create([
+            'name' => $data['first_name'].' '.$data['last_name'] ,
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'company' =>$data['company'],
+            'first_name' =>$data['first_name'],
+            'last_name' =>$data['last_name'],
+            'company_position' =>$data['company_position'],
+            'phone' =>$data['phone'],
+            'company_activity' =>$data['company_activity'],
+            'address' =>$data['address'],
+            'city' =>$data['city'],
+            'state' =>$data['state'],
+            'zip' =>$data['zip'],
         ]);
+        $directory = 'user_'.$user->id;
+
+        Storage::makeDirectory($directory);
+       // dd($user);
+        return $user;
     }
 }
